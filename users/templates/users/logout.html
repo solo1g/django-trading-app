@@ -1,0 +1,10 @@
+{% extends 'stocks/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<h2>Logged out</h2>
+<div class="border-top pt-3">
+    <small class="text-muted">
+        <a href="{% url 'login' %}">Log in?</a>
+    </small>
+</div>
+{% endblock content %}
