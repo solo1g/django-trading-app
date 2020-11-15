@@ -1,0 +1,116 @@
+{% extends 'stocks/base.html' %}
+{% load static %}
+{% block content %}
+    <header class="masthead text-white text-center" style="background:url(&quot;{% static 'stocks/assets/img/bg-masthead.jpg' %}&quot;)no-repeat center center;background-size:cover;">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-9 mx-auto">				<div class="caption v-middle text-center">
+					<h1 class="cd-headline clip">
+			            <span class="blc">Become a</span>
+			            <span class="cd-words-wrapper">
+			              <b class="is-visible">Stock expert</b>
+			              <b>Market Breaker</b>
+			              <b>Master Trader</b>
+			            </span>
+	          		</h1>
+				</div></div>
+                <div class="col-5 col-md-4 col-lg-4 col-xl-4 mx-auto">
+                    <form style="opacity: 1;"><button class="btn btn-primary btn-block btn-lg" data-bs-hover-animate="wobble" type="submit">Sign up!</button></form>
+                </div>
+            </div>
+        </div>
+    </header>
+    <section class="features-icons bg-light text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="mx-auto features-icons-item mb-5 mb-lg-0 mb-lg-3">
+                        <div class="d-flex features-icons-icon"><i class="icon-screen-desktop m-auto text-primary" data-bs-hover-animate="pulse"></i></div>
+                        <h3>Fully Responsive</h3>
+                        <p class="lead mb-0">Become a Master Trader on any device!</p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="mx-auto features-icons-item mb-5 mb-lg-0 mb-lg-3">
+                        <div class="d-flex features-icons-icon"><i class="icon-layers m-auto text-primary" data-bs-hover-animate="pulse"></i></div>
+                        <h3>Deep simulation</h3>
+                        <p class="lead mb-0">All features of any professional app are implemented!</p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="mx-auto features-icons-item mb-5 mb-lg-0 mb-lg-3">
+                        <div class="d-flex features-icons-icon"><i class="icon-check m-auto text-primary" data-bs-hover-animate="pulse"></i></div>
+                        <h3>Easy to Use</h3>
+                        <p class="lead mb-0">A beautiful and intuitive UI makes it really easy to use!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="showcase">
+        <div class="container-fluid p-0">
+            <div class="row no-gutters">
+                <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image:url(&quot;{% static 'stocks/assets/img/bg-showcase-2.jpg' %}&quot;);"><span></span></div>
+                <div class="col-lg-6 my-auto order-lg-1 showcase-text">
+                    <h2>Fully Responsive Design</h2>
+                    <p class="lead mb-0">The app can be used with unparalleled ease and comfort on any platform of your choice.</p>
+                </div>
+            </div>
+            <div class="row no-gutters">
+                <div class="col-lg-6 text-white showcase-img" style="background-image:url(&quot;{% static 'stocks/assets/img/bg-showcase-2.jpg' %}&quot;);"><span></span></div>
+                <div class="col-lg-6 my-auto order-lg-1 showcase-text">
+                    <h2>Fully feature equipped</h2>
+                    <p class="lead mb-0">All the various features that you would expect in any cutting edge trading app are present in this.</p>
+                </div>
+            </div>
+            <div class="row no-gutters">
+                <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image:url(&quot;{% static 'stocks/assets/img/bg-showcase-3.jpg' %}&quot;);"><span></span></div>
+                <div class="col-lg-6 my-auto order-lg-1 showcase-text">
+                    <h2>Easy to Use</h2>
+                    <p class="lead mb-0">The intuitive UI and UX make learning to trade like a pro a child's play.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="testimonials text-center bg-light">
+        <div class="container">
+            <h2 class="mb-5">What people are saying...</h2>
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="mx-auto testimonial-item mb-5 mb-lg-0"><img class="rounded-circle img-fluid mb-3" src="{% static 'stocks/assets/img/testimonials-1.jpg' %}">
+                        <h5>Margaret E.</h5>
+                        <p class="font-weight-light mb-0">"Master Trader will make you a Master Trader"</p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="mx-auto testimonial-item mb-5 mb-lg-0"><img class="rounded-circle img-fluid mb-3" src="{% static 'stocks/assets/img/testimonials-2.jpg' %}">
+                        <h5>Fred S.</h5>
+                        <p class="font-weight-light mb-0">"Really what I needed. The dev team did an amazing job!"</p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="mx-auto testimonial-item mb-5 mb-lg-0"><img class="rounded-circle img-fluid mb-3" src="{% static 'stocks/assets/img/testimonials-3.jpg' %}">
+                        <h5>Sarah W.</h5>
+                        <p class="font-weight-light mb-0">"I would gladly pay any subscription fees for this app. Really awesome."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="call-to-action text-white text-center" style="background:url(&quot;{% static 'stocks/assets/img/bg-masthead.jpg' %}&quot;) no-repeat center center;background-size:cover;">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-9 mx-auto">
+                    <h2 class="mb-4">Ready to get started? Sign up now!</h2>
+                </div>
+                <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
+                    <form>
+                        <div class="form-row"><button class="btn btn-primary btn-block btn-lg" data-aos="zoom-in" type="submit" style="margin: 0 80px;padding: 8px 16px;">Sign up!</button></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock content %}
