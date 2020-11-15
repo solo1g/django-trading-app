@@ -14,18 +14,58 @@
     <link rel="stylesheet" href="{% static 'stocks/assets/css/Animated-Type-Heading.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.css">
-    <link rel="shortcut icon" type="image/png" href="{% static 'stocks/assets/favicon.png' %}"/>
+    <link rel="shortcut icon" type="image/png" href="{% static 'stocks/favicon.png' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'stocks/assets/css/main.css' %}">
 
 </head>
 
-<body>
-    <nav class="navbar navbar-light navbar-expand bg-light navigation-clean">
+<body class>
+    {% comment %} <nav class="navbar navbar-light navbar-expand bg-light navigation-clean">
         <div class="container"><a class="navbar-brand" href="#">Master Trader</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"></button>
-            <div class="collapse navbar-collapse" id="navcol-1"><a class="btn btn-primary ml-auto" role="button" href="#">Sign In</a></div>
+            <div class="collapse navbar-collapse" id="navcol-1">
+                <a class="btn btn-primary" role="button" href="#">Sign In</a>
+                <a class="btn btn-primary" role="button" href="#">Sign In</a>
+                <a class="btn btn-primary" role="button" href="#">Sign In</a>
+            </div>
         </div>
-    </nav>
-    {% block content %}
-    {% endblock content %}
+    </nav> {% endcomment %}
+    <header class="site-header">
+        <nav class="navbar navbar-expand navbar-light bg-steel navigation-clean fixed-top">
+            <div class="container">
+            <a class="navbar-brand mr-4" href="{% url 'stocks-home' %}">Master Trader</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarToggle">
+                <div class="navbar-nav mr-auto">
+                <a class="nav-item nav-link" href="{% url 'stocks-home' %}">Home</a>
+                <a class="nav-item nav-link" href="{% url 'stocks-home' %}">About</a>
+                </div>
+                <!-- Navbar Right Side -->
+                <div class="navbar-nav">
+                {% if user.is_authenticated %}
+                <a class="nav-item nav-link" href="{% url 'stocks-home' %}">Dashboard</a>
+                <a class="nav-item nav-link" href="{% url 'profile' %}">Profile</a>
+                <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
+                {% else %}
+                <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
+                <a class="nav-item nav-link" href="{% url 'register' %}">Register</a>
+                {% endif %}
+                </div>
+            </div>
+            </div>
+        </nav>
+    </header>
+    <div>
+      {% if messages %}
+        {% for message in messages %}
+          <div class="alert alert-{{ message.tags }}">
+            {{ message }}
+          </div>
+        {% endfor %}
+      {% endif %}
+      {% block content %}{% endblock %}
+    </div>
     <footer class="footer bg-light">
         <div class="container">
             <div class="row">
