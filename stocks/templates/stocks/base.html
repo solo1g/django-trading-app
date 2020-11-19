@@ -39,12 +39,12 @@
             <div class="collapse navbar-collapse" id="navbarToggle">
                 <div class="navbar-nav mr-auto">
                 <a class="nav-item nav-link" href="{% url 'stocks-home' %}">Home</a>
-                <a class="nav-item nav-link" href="{% url 'stocks-home' %}">About</a>
+                <a class="nav-item nav-link" href="{% url 'stocks-about' %}">About</a>
                 </div>
                 <!-- Navbar Right Side -->
                 <div class="navbar-nav">
                 {% if user.is_authenticated %}
-                <a class="nav-item nav-link" href="{% url 'stocks-home' %}">Dashboard</a>
+                <a class="nav-item nav-link" href="{% url 'stocks-dashboard' %}">Dashboard</a>
                 <a class="nav-item nav-link" href="{% url 'profile' %}">Profile</a>
                 <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
                 {% else %}
@@ -71,7 +71,7 @@
             <div class="row">
                 <div class="col-lg-6 my-auto h-100 text-center text-lg-left">
                     <ul class="list-inline mb-2">
-                        <li class="list-inline-item"><a href="#">About</a></li>
+                        <li class="list-inline-item"><a href="{% url 'stocks-about' %}">About</a></li>
                         <li class="list-inline-item"><span>⋅</span></li>
                         <li class="list-inline-item"><a href="#">Contact</a></li>
                         <li class="list-inline-item"><span>⋅</span></li>
@@ -96,6 +96,8 @@
     <script src="{% static 'stocks/assets/js/bs-init.js' %}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.js"></script>
     <script src="{% static 'stocks/assets/js/Animated-Type-Heading.js' %}"></script>
+    {% block scripts %}
+    {% endblock scripts %}
 </body>
 
 </html>
