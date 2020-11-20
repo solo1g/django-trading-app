@@ -5,10 +5,10 @@
 	<div class="row">
 		<div class="col-md-4">
             <div class="row">
-                <div class="col-12 col-sm-8 col-lg-5">
+                <div class="shadow-lg rounded mr-4">
                     {% for stock in stocks %}
-                        <div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-                            <a style="text-decoration: none; color: black;" onclick="select_chart('{{stock.name}}')">
+                        <div class="list-group-item list-group-item-action d-flex">
+                            <a style="text-decoration: none; color: black; font-size:18px;" onclick="select_chart('{{stock.name}}')">
                                 <div class="flex-column">
                                     {{stock.name}}
                                     <p><small>{{stock.full_name}}</small></p>
@@ -17,13 +17,17 @@
                                     <span id="{{ stock.name }}-ltp" class="l badge badge-info badge-pill">₹{{stock.ltp}}</span>
                                 </div>
                             </a>
-                            <div>
-                                <input class="quantity" value="1" type="number">Quantity
-                                <button class="btn btn-success" onclick="buy(this,'{{stock.name}}')">Buy</button>
-                                <button class="btn btn-danger" onclick="sell(this,'{{stock.name}}')">Sell</button>
+                            <div class="ml-4">
+                                <label>Quantity</label><input class="quantity input-group" value="1" type="number">
+                                <button class="mt-2 btn btn-success" onclick="buy(this,'{{stock.name}}')">Buy</button>
+                                <button class="mt-2 btn btn-danger" onclick="sell(this,'{{stock.name}}')">Sell</button>
                             </div>
                         </div>
                     {% endfor %}
+                    <div id="holdings" class="p-2">
+                    </div>
+                    <div id="message_box">
+                    </div>
                 </div>
             </div>
 		</div>
@@ -31,10 +35,6 @@
             <canvas id="myChart"></canvas>
 		</div>
 	</div>
-    <div id="message">
-    </div>
-    <div id="holdings">
-    </div>
 </div>
 {% endblock content %}
 
@@ -54,7 +54,7 @@ setInterval(()=>{
             $('#'+key+'-ltp').html('₹'+value)
         }
     });
-},5000);
+},2000);
 
 function buy(cur,stock){
     let quantity=$(cur).prev().val()
@@ -69,8 +69,11 @@ function buy(cur,stock){
 
         },
         success : function(data){
-            console.log("success")
-            $('#message').html("Bought!")
+            console.log(data)
+            $('#message_box').html(`<div class='p-2 rounded badge-success' id='message'>${data}</div>`);
+            setTimeout(()=>{
+            $('#message').fadeOut();
+            }, 1000 );
         }
     });
 }
@@ -88,8 +91,11 @@ function sell(cur,stock){
 
         },
         success : function(data){
-            console.log("success")
-            $('#message').html("Sold!")
+            console.log(data)
+            $('#message_box').html(`<div class='p-2 rounded badge-danger' id='message'>${data}</div>`);
+            setTimeout(()=>{
+            $('#message').fadeOut();
+            }, 1000 );
         }
     });
 }

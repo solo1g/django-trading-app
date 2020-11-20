@@ -10,4 +10,6 @@ urlpatterns = [
     path('transact/', views.transact, name='transact'),
     path('chart_query/', views.chart_query, name='chart-query'),
     path('account_value/', views.account_value, name='account-value'),
+    path('add_money/', views.add_money, name='add-money'),
+    path('portfolio/', views.portfolio, name='portfolio'),
 ]

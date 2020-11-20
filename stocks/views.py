@@ -1,8 +1,10 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, HttpResponse, redirect
 from django.http import JsonResponse
 from random import uniform
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import *
+from .forms import *
 
 
 def home(request):
@@ -88,10 +90,10 @@ def transact(request):
                         print("Saving new account value")
                         user.accountvalue_set.create(value=(
                             ac_value-stock_chosen.ltp*quantity), holdings_value=latest_account.holdings_value).save()
-                        return HttpResponse("Success")
+                        return HttpResponse("Bought")
+                else:
+                    return HttpResponse("Not enough money!")
             elif request.POST.get('type') == "sell":
-                print("trying to sell", quantity, "have",
-                      user.portfolio_set.get(stock=stock_chosen).quantity)
                 try:
                     if user.portfolio_set.get(stock=stock_chosen).quantity > quantity:
                         print("creating sell transaction")
@@ -104,10 +106,12 @@ def transact(request):
                         user.accountvalue_set.create(value=(
                             ac_value+change), holdings_value=(latest_account.holdings_value)).save()
                         stock_in_portfolio.save()
-                        return HttpResponse("Success")
+                        return HttpResponse("Sold!")
+                    else:
+                        return HttpResponse("Not holding enough shares!")
                 except:
-                    return HttpResponse("Fail")
-    return HttpResponse("Fail")
+                    return HttpResponse("Not holding enough shares!")
+    return HttpResponse("This should never happen. Contact the devs!")
 
 
 @login_required
@@ -130,11 +134,32 @@ def account_value(request):
     latest_account = request.user.accountvalue_set.all().order_by('-time')[0]
     current = latest_account.holdings_value
     cash = latest_account.value
-    # endure this is the default value for money on new account
+    # ensure this is the default value for money on new account
     initial = 10000.0
     gain_percent = ((current+cash)/initial-1)*100.0
-    return HttpResponse(f'<span>${round(current,2)} ▲${round(gain_percent,2)}% Cash:${round(cash,2)}')
+    color = "text-success" if gain_percent >= 0 else "text-danger"
+    return HttpResponse(f'<p>Holdings Value: ₹{round(current,2)}</p><p class="{color}">▲{round(gain_percent,2)}%</p><p>Cash: ₹{round(cash,2)}</p>')
 
 
 @login_required
-def change_money(reques):
+def add_money(request):
+    if request.method == 'POST':
+        form = MoneyForm(request.POST)
+        if form.is_valid():
+            money = form.cleaned_data.get('money')
+            last_value = request.user.accountvalue_set.all().order_by('-time').first()
+            request.user.accountvalue_set.create(
+                value=last_value.value+money, holdings_value=last_value.holdings_value).save()
+            messages.success(request, f'₹{money} added!')
+            return redirect('stocks-dashboard')
+    else:
+        form = MoneyForm()
+    return render(request, 'stocks/money.html', {'form': form})
+
+
+@login_required
+def portfolio(request):
+    query = request.user.portfolio_set.all()
+    data = [{'name': each.stock.name, 'full_name': each.stock.full_name, 'ltp': each.stock.ltp, 'quantity': each.quantity}
+            for each in query]
+    return render(request, 'stocks/portfolio.html', {'data': data})
