@@ -6,10 +6,10 @@ class Stock(models.Model):
     name = models.CharField(max_length=10, default="SY")
     full_name = models.CharField(max_length=50, default="Tech Company")
     description = models.TextField(default="A promising tech company")
-    ltp = models.FloatField(default=1000.0000)
+    ltp = models.FloatField(default=100.0000)
     # generation data
     variance_lower_bound = models.FloatField(default=0.9)
-    variance_upper_bound = models.FloatField(default=1.1)
+    variance_upper_bound = models.FloatField(default=1.2)
 
     def __str__(self):
         return self.name
@@ -17,7 +17,7 @@ class Stock(models.Model):
 
 class StockPrice(models.Model):
     stock = models.ForeignKey(Stock, on_delete=models.CASCADE)
-    price = models.FloatField(default=1000.00)
+    price = models.FloatField(default=100.00)
     time = models.TimeField(auto_now=True)
 
 
@@ -49,3 +49,4 @@ class AccountValue(models.Model):
         User, on_delete=models.CASCADE)
     time = models.TimeField(auto_now=True)
     value = models.FloatField(default=10000.00)
+    holdings_value = models.FloatField(default=0.0)
