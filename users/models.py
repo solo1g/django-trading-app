@@ -7,7 +7,6 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     mobile_number = models.CharField(max_length=10, default="")
     pan = models.CharField(max_length=10, default="")
-    money = models.FloatField(default=100000.0)
     image = models.ImageField(
         default='default_profile_image.jpg', upload_to='profile_images')
 

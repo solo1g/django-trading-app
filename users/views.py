@@ -3,6 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
+from stocks.models import *
 
 
 def register(request):
@@ -36,4 +37,7 @@ def profile(request):
         'user_form': user_form,
         'profile_form': profile_form
     }
+    # adding filed from stocks app
+    context['series'] = [ac.holdings_value for ac in request.user.accountvalue_set.all(
+    ).order_by('-time')[:25][::-1]]
     return render(request, 'users/profile.html', context)

@@ -89,15 +89,24 @@ def transact(request):
                         user.accountvalue_set.create(value=(
                             ac_value-stock_chosen.ltp*quantity), holdings_value=latest_account.holdings_value).save()
                         return HttpResponse("Success")
-            elif request.POST.get('button') == "sell":
-                if user.portfolio_set.get(stock=stock_chosen).exists() and user.portfolio_set.get(stock=stock_chosen).quantity < quantity:
-                    Transaction.objects.create(
-                        user=user, stock=stock_chosen, units=quantity, price_each=stock_chosen.ltp, transaction='sell').save()
-                    stock_in_portfolio = user.portfolio_set.get(
-                        stock=stock_chosen)
-                    stock_in_portfolio.quantity -= quantity
-                    stock_in_portfolio.save()
-                    return HttpResponse("Success")
+            elif request.POST.get('type') == "sell":
+                print("trying to sell", quantity, "have",
+                      user.portfolio_set.get(stock=stock_chosen).quantity)
+                try:
+                    if user.portfolio_set.get(stock=stock_chosen).quantity > quantity:
+                        print("creating sell transaction")
+                        Transaction.objects.create(
+                            user=user, stock=stock_chosen, units=quantity, price_each=stock_chosen.ltp, transaction='sell').save()
+                        stock_in_portfolio = user.portfolio_set.get(
+                            stock=stock_chosen)
+                        stock_in_portfolio.quantity -= quantity
+                        change = stock_chosen.ltp*quantity
+                        user.accountvalue_set.create(value=(
+                            ac_value+change), holdings_value=(latest_account.holdings_value)).save()
+                        stock_in_portfolio.save()
+                        return HttpResponse("Success")
+                except:
+                    return HttpResponse("Fail")
     return HttpResponse("Fail")
 
 
@@ -125,3 +134,7 @@ def account_value(request):
     initial = 10000.0
     gain_percent = ((current+cash)/initial-1)*100.0
     return HttpResponse(f'<span>${round(current,2)} ▲${round(gain_percent,2)}% Cash:${round(cash,2)}')
+
+
+@login_required
+def change_money(reques):

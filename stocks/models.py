@@ -8,8 +8,8 @@ class Stock(models.Model):
     description = models.TextField(default="A promising tech company")
     ltp = models.FloatField(default=100.0000)
     # generation data
-    variance_lower_bound = models.FloatField(default=0.9)
-    variance_upper_bound = models.FloatField(default=1.2)
+    variance_lower_bound = models.FloatField(default=0.99)
+    variance_upper_bound = models.FloatField(default=1.01)
 
     def __str__(self):
         return self.name
