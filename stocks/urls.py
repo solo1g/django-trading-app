@@ -12,4 +12,5 @@ urlpatterns = [
     path('account_value/', views.account_value, name='account-value'),
     path('add_money/', views.add_money, name='add-money'),
     path('portfolio/', views.portfolio, name='portfolio'),
+    path('transactions/', views.transactions, name='transactions'),
 ]

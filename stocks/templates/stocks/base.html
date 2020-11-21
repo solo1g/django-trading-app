@@ -46,6 +46,7 @@
                 {% if user.is_authenticated %}
                 <a class="nav-item nav-link" href="{% url 'add-money' %}">Add Money</a>
                 <a class="nav-item nav-link" href="{% url 'portfolio' %}">Portfolio</a>
+                <a class="nav-item nav-link" href="{% url 'transactions' %}">Transactions</a>
                 <a class="nav-item nav-link" href="{% url 'stocks-dashboard' %}">Dashboard</a>
                 <a class="nav-item nav-link" href="{% url 'profile' %}">Profile</a>
                 <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>

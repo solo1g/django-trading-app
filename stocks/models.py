@@ -18,7 +18,7 @@ class Stock(models.Model):
 class StockPrice(models.Model):
     stock = models.ForeignKey(Stock, on_delete=models.CASCADE)
     price = models.FloatField(default=100.00)
-    time = models.TimeField(auto_now=True)
+    time = models.DateTimeField(auto_now=True)
 
 
 class Transaction(models.Model):
@@ -26,7 +26,7 @@ class Transaction(models.Model):
         User, on_delete=models.CASCADE)
     stock = models.ForeignKey(
         Stock, on_delete=models.CASCADE)
-    time = models.TimeField(auto_now=True)
+    time = models.DateTimeField(auto_now=True)
     units = models.IntegerField()
     price_each = models.FloatField()
     choices = (
@@ -47,6 +47,6 @@ class Portfolio(models.Model):
 class AccountValue(models.Model):
     user = models.ForeignKey(
         User, on_delete=models.CASCADE)
-    time = models.TimeField(auto_now=True)
+    time = models.DateTimeField(auto_now=True)
     value = models.FloatField(default=10000.00)
     holdings_value = models.FloatField(default=0.0)

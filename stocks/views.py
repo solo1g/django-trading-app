@@ -163,3 +163,13 @@ def portfolio(request):
     data = [{'name': each.stock.name, 'full_name': each.stock.full_name, 'ltp': each.stock.ltp, 'quantity': each.quantity}
             for each in query]
     return render(request, 'stocks/portfolio.html', {'data': data})
+
+
+@login_required
+def transactions(request):
+    query = request.user.transaction_set.order_by('-time')
+    data = [
+        {'name': each.stock.name, 'full_name': each.stock.full_name,
+            'price': each.price_each, 'quantity': each.units, 'time': each.time, 'type': each.transaction, }
+        for each in query]
+    return render(request, 'stocks/transactions.html', {'data': data})

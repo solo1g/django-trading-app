@@ -1,0 +1,10 @@
+{% extends 'stocks/base.html' %}
+{% block content %}
+<div class="container">
+    <ul class="list-group">
+    {% for each in data %}
+        <li class="list-group-item">{{ each.name }} ({{each.full_name}})  <span class="ml-4">Price: ₹{{ each.price }}</span> <span class="ml-4">{{each.type}} Quantity: {{ each.quantity }} at {{each.time}}</span></li>
+    {% endfor %}
+    </ul>
+</div>
+{% endblock content %}
