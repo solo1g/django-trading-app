@@ -1,3 +1,5 @@
+A virtual trading app built with django as backend and javascript,html,css for frontend.
+
 # Instructions to run:
 
 - Set up virtual environment from requirements.txt
