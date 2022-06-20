@@ -1,0 +1,2 @@
+			
+web: gunicorn Django-Trading-App.wsgi
